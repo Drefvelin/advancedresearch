@@ -40,25 +40,25 @@ public class ResearchEvents implements Listener{
 		RPlayer rp = ResearchMain.getRPlayerbyPlayer(p);
 		if(nbt.getType().equalsIgnoreCase(ConfigLoader.minorPotion.split("\\.")[0]) && nbt.getString("MMOITEMS_ITEM_ID").equalsIgnoreCase(ConfigLoader.minorPotion.split("\\.")[1])) {
 			if(rp.getMentalPoints() >= 150) {
-				p.sendMessage("§cAlready at max Mental Points!");
+				p.sendMessage("Â§cAlready at max Mental Points!");
 				return;
 			}
 			p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount()-1);
 			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITCH_DRINK, 3f, 1f);
 			Integer amount = rp.getMentalPoints()+20;
 			if(amount > 150) amount = 150;
-			p.sendMessage("§EYou now have §a"+amount+" §6Mental Points.");
+			p.sendMessage("Â§EYou now have Â§a"+amount+" Â§6Mental Points.");
 			rp.setMentalPoints(amount);
 		} else if(nbt.getType().equalsIgnoreCase(ConfigLoader.majorPotion.split("\\.")[0]) && nbt.getString("MMOITEMS_ITEM_ID").equalsIgnoreCase(ConfigLoader.majorPotion.split("\\.")[1])){
 			if(rp.getMentalPoints() >= 150) {
-				p.sendMessage("§cAlready at max Mental Points!");
+				p.sendMessage("Â§cAlready at max Mental Points!");
 				return;
 			}
 			p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount()-1);
 			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITCH_DRINK, 3f, 1f);
 			Integer amount = rp.getMentalPoints()+50;
 			if(amount > 150) amount = 150;
-			p.sendMessage("§EYou now have §a"+amount+" §6Mental Points.");
+			p.sendMessage("Â§EYou now have Â§a"+amount+" Â§6Mental Points.");
 			rp.setMentalPoints(amount);
 		}
 	}
@@ -71,7 +71,7 @@ public class ResearchEvents implements Listener{
 		for(RStation rs : stations) {
 			if(rs.getLoc().equals(e.getClickedBlock().getLocation())) {
 				if(!rs.getOwner().equalsIgnoreCase(p.getUniqueId().toString())) {
-					p.sendMessage("§cStation in use by someone else");
+					p.sendMessage("Â§cStation in use by someone else");
 					return;
 				}
 				inv.MenuInventory(p, rs);
@@ -118,7 +118,7 @@ public class ResearchEvents implements Listener{
 		List<Integer> validSlots = Arrays.asList(3, 5);
 		if(!validSlots.contains(e.getSlot())) return;
 		if(e.getSlot() == 3) {
-			p.sendMessage("§cProject scrapped.");
+			p.sendMessage("Â§cProject scrapped.");
 			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ITEM_BREAK, 4f, 1f);
 			p.closeInventory();
 			rp.setCurrentStation(null);
@@ -158,21 +158,21 @@ public class ResearchEvents implements Listener{
 		}
 		if(e.getSlot() == 16) {
 			if(rp.getMentalPoints() < 1) {
-				p.sendMessage("§cYou are too exhausted to research right now.");
+				p.sendMessage("Â§cYou are too exhausted to research right now.");
 				p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
 				return;
 			}
 			doResearch(i, rp, rs, rs.getTopNote());
 		} else if(e.getSlot() == 25) {
 			if(rp.getMentalPoints() < 1) {
-				p.sendMessage("§cYou are too exhausted to research right now.");
+				p.sendMessage("Â§cYou are too exhausted to research right now.");
 				p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
 				return;
 			}
 			doResearch(i, rp, rs, rs.getMiddleNote());
 		} else if(e.getSlot() == 34) {
 			if(rp.getMentalPoints() < 1) {
-				p.sendMessage("§cYou are too exhausted to research right now.");
+				p.sendMessage("Â§cYou are too exhausted to research right now.");
 				p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
 				return;
 			}
@@ -227,7 +227,7 @@ public class ResearchEvents implements Listener{
 			}
 		}
 		if(checkAmounts(rs)) {
-			rp.getPlayer().sendMessage("§dResearch Completed!");
+			rp.getPlayer().sendMessage("Â§dResearch Completed!");
 			rs.setCompleted(true);
 			setResult(i, rp.getPlayer(), rs);
 		}
@@ -301,10 +301,10 @@ public class ResearchEvents implements Listener{
 	}
 	
 	public void startResearch(Player p, Location loc, Input i, String itemName) {
-		p.sendMessage("§eStarted research of "+itemName);
+		p.sendMessage("Â§eStarted research of "+itemName);
 		RPlayer r = ResearchMain.getRPlayerbyPlayer(p);
 		if(r.getCurrentStation() != null) {
-			p.sendMessage("§cYou already have a project!");
+			p.sendMessage("Â§cYou already have a project!");
 			return;
 		}
 		p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount()-1);

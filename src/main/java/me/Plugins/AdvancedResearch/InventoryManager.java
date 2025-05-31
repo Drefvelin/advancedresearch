@@ -33,10 +33,10 @@ public class InventoryManager {
 					List<String> lore = new ArrayList<String>();
 					for(String ce : rs.getCurrentElements()) {
 						if(ce.split("\\.")[0].equalsIgnoreCase(e.split("\\.")[0])) {
-							lore.add("ง7Current amount: งe"+ce.split("\\.")[1]);
+							lore.add("ยง7Current amount: ยงe"+ce.split("\\.")[1]);
 						}
 					}
-					lore.add("ง7Needed amount: งe"+e.split("\\.")[1]);
+					lore.add("ยง7Needed amount: ยงe"+e.split("\\.")[1]);
 					lore.add(" ");
 					for(String l : re.getLore()) {
 						lore.add(l);
@@ -50,16 +50,16 @@ public class InventoryManager {
 		}
 		ItemStack cancelItem = new ItemStack(Material.BARRIER, 1);
 		ItemMeta cm = cancelItem.getItemMeta();
-		cm.setDisplayName("งcScrap");
+		cm.setDisplayName("ยงcScrap");
 		List<String> cLore = new ArrayList<String>();
-		cLore.add("ง4WARNING! งcThe item will not be refunded!");
+		cLore.add("ยง4WARNING! ยงcThe item will not be refunded!");
 		cm.setLore(cLore);
 		cancelItem.setItemMeta(cm);
 		i.setItem(53, cancelItem);
 		ItemStack mentalPoints = new ItemStack(Material.LIGHT, 1);
 		RPlayer rp = ResearchMain.getRPlayerbyPlayer(player);
 		ItemMeta mentalM = mentalPoints.getItemMeta();
-		mentalM.setDisplayName("ง7Mental Points: ง6"+rp.getMentalPoints());
+		mentalM.setDisplayName("ยง7Mental Points: ยง6"+rp.getMentalPoints());
 		mentalPoints.setItemMeta(mentalM);
 		i.setItem(45, mentalPoints);
 		i.setItem(13, getItemsAdderFiller("mcicons:icon_down_blue"));
@@ -101,7 +101,7 @@ public class InventoryManager {
 					if(slot != 22) {
 						ItemStack fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 						ItemMeta fm = fill.getItemMeta();
-						fm.setDisplayName("ง8 ");
+						fm.setDisplayName("ยง8 ");
 						fill.setItemMeta(fm);
 						i.setItem(slot, fill);
 					}
@@ -119,11 +119,11 @@ public class InventoryManager {
 		Inventory i = ResearchMain.plugin.getServer().createInventory(null, 9, ChatColor.GRAY + "Confirm Scrap");
 		ItemStack yesItem = new ItemStack(Material.GREEN_CONCRETE, 1);
 		ItemMeta ym = yesItem.getItemMeta();
-		ym.setDisplayName("ง2YES");
+		ym.setDisplayName("ยง2YES");
 		yesItem.setItemMeta(ym);
 		ItemStack noItem = new ItemStack(Material.RED_CONCRETE, 1);
 		ItemMeta nm = noItem.getItemMeta();
-		nm.setDisplayName("งcNO");
+		nm.setDisplayName("ยงcNO");
 		noItem.setItemMeta(nm);
 		i.setItem(3, yesItem);
 		i.setItem(5, noItem);
@@ -132,7 +132,7 @@ public class InventoryManager {
 			if(i.getItem(slot) == null) {
 				ItemStack fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 				ItemMeta fm = fill.getItemMeta();
-				fm.setDisplayName("ง8 ");
+				fm.setDisplayName("ยง8 ");
 				fill.setItemMeta(fm);
 				i.setItem(slot, fill);
 			}
@@ -153,10 +153,10 @@ public class InventoryManager {
 					List<String> lore = new ArrayList<String>();
 					for(String ce : rs.getCurrentElements()) {
 						if(ce.split("\\.")[0].equalsIgnoreCase(e.split("\\.")[0])) {
-							lore.add("ง7Current amount: งe"+ce.split("\\.")[1]);
+							lore.add("ยง7Current amount: ยงe"+ce.split("\\.")[1]);
 						}
 					}
-					lore.add("ง7Needed amount: งe"+e.split("\\.")[1]);
+					lore.add("ยง7Needed amount: ยงe"+e.split("\\.")[1]);
 					lore.add(" ");
 					for(String l : re.getLore()) {
 						lore.add(l);
@@ -171,7 +171,7 @@ public class InventoryManager {
 		ItemStack mentalPoints = new ItemStack(Material.LIGHT, 1);
 		RPlayer rp = ResearchMain.getRPlayerbyPlayer(p);
 		ItemMeta mentalM = mentalPoints.getItemMeta();
-		mentalM.setDisplayName("ง7Mental Points: ง6"+rp.getMentalPoints());
+		mentalM.setDisplayName("ยง7Mental Points: ยง6"+rp.getMentalPoints());
 		mentalPoints.setItemMeta(mentalM);
 		i.setItem(45, mentalPoints);
 		i.setItem(16, getResearchNote(rs.getTopNote()));
@@ -185,7 +185,7 @@ public class InventoryManager {
 		if(stack != null) {
 			ItemStack i = stack.getItemStack();
 			ItemMeta m = i.getItemMeta();
-			m.setDisplayName("ง8 ");
+			m.setDisplayName("ยง8 ");
 			i.setItemMeta(m);
 			return i;
 		}
@@ -209,13 +209,13 @@ public class InventoryManager {
 	public ItemStack getResearchNote(ResearchNote n) {
 		ItemStack i = new ItemStack(Material.PAPER, 1);
 		ItemMeta m = i.getItemMeta();
-		m.setDisplayName("ง6Research Note");
+		m.setDisplayName("ยง6Research Note");
 		List<String> lore = new ArrayList<String>();
 		for(String s : n.getElements()) {
 			if(Integer.parseInt(s.split("\\.")[1]) < 0) {
-				lore.add("ง7"+s.split("\\.")[0]+": งc"+s.split("\\.")[1]);
+				lore.add("ยง7"+s.split("\\.")[0]+": ยงc"+s.split("\\.")[1]);
 			} else {
-				lore.add("ง7"+s.split("\\.")[0]+": ง2+"+s.split("\\.")[1]);
+				lore.add("ยง7"+s.split("\\.")[0]+": ยง2+"+s.split("\\.")[1]);
 			}
 		}
 		m.setLore(lore);
@@ -235,10 +235,10 @@ public class InventoryManager {
 					List<String> lore = new ArrayList<String>();
 					for(String ce : rs.getCurrentElements()) {
 						if(ce.split("\\.")[0].equalsIgnoreCase(e.split("\\.")[0])) {
-							lore.add("ง7Current amount: งe"+ce.split("\\.")[1]);
+							lore.add("ยง7Current amount: ยงe"+ce.split("\\.")[1]);
 						}
 					}
-					lore.add("ง7Needed amount: งe"+e.split("\\.")[1]);
+					lore.add("ยง7Needed amount: ยงe"+e.split("\\.")[1]);
 					lore.add(" ");
 					for(String l : re.getLore()) {
 						lore.add(l);
@@ -253,7 +253,7 @@ public class InventoryManager {
 		ItemStack mentalPoints = new ItemStack(Material.LIGHT, 1);
 		RPlayer rp = ResearchMain.getRPlayerbyPlayer(p);
 		ItemMeta mentalM = mentalPoints.getItemMeta();
-		mentalM.setDisplayName("ง7Mental Points: ง6"+rp.getMentalPoints());
+		mentalM.setDisplayName("ยง7Mental Points: ยง6"+rp.getMentalPoints());
 		mentalPoints.setItemMeta(mentalM);
 		i.setItem(45, mentalPoints);
 		i.setItem(16, new ItemStack(Material.AIR, 1));

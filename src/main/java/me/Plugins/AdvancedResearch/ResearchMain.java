@@ -44,7 +44,7 @@ public class ResearchMain extends JavaPlugin{
 		for(RPlayer r : Database.loadedPlayers) {
 			if(r.getPlayer().equals(p)) return r;
 		}
-		System.out.println("§c[AdvancedResearch] ERROR: No Research Player found for the player "+p);
+		System.out.println("Â§c[AdvancedResearch] ERROR: No Research Player found for the player "+p);
 		return null;
 	}
 	@Override
