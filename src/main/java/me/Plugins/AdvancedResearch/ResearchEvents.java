@@ -23,6 +23,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.lone.itemsadder.api.CustomStack;
 import io.lumine.mythic.lib.api.item.NBTItem;
+import net.Indyuce.mmocore.api.player.PlayerData;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.manager.ItemManager;
 
@@ -231,9 +232,9 @@ public class ResearchEvents implements Listener{
 			rs.setCompleted(true);
 			setResult(i, rp.getPlayer(), rs);
 		}
-		rs.setTopNote(generateNote(rs));
-		rs.setMiddleNote(generateNote(rs));
-		rs.setBottomNote(generateNote(rs));
+		rs.setTopNote(generateNote(rp.getPlayer(), rs));
+		rs.setMiddleNote(generateNote(rp.getPlayer(), rs));
+		rs.setBottomNote(generateNote(rp.getPlayer(), rs));
 		rp.setMentalPoints(rp.getMentalPoints()-1);
 		inv.UpdateInventory(i, rp.getPlayer(), rs);
 	}
@@ -282,23 +283,60 @@ public class ResearchEvents implements Listener{
 		Integer high = Integer.parseInt(ConfigLoader.lowAmount.split("\\-")[1]);
 		return (int) ((int) 5*Math.round(Math.floor((Math.random()*high)+low)/5));
 	}
-	public ResearchNote generateNote(RStation s) {
+	public ResearchNote generateNote(Player p, RStation s) {
 		ResearchNote n = new ResearchNote();
 		n.setId(UUID.randomUUID());
 		int i = 0;
-		while(n.getElements().size() < 1 && i<20) {
+
+		while (n.getElements().size() < 1 && i < 20) {
 			Collections.shuffle(s.getNeededElements());
-			for(String elstr : s.getNeededElements()) {
-				if(Math.floor(Math.random()*4) == 1) {
-					Integer amount = (int) ((int) 5*Math.round(Math.floor((Math.random()*15)+5)/5));
-					if(Math.floor(Math.random()*2)+1 == 1) amount = amount *-1;
-					n.getElements().add(elstr.split("\\.")[0]+"."+amount);
+			for (String elstr : s.getNeededElements()) {
+				if (Math.random() < 0.25) { // 25% chance to include this element
+					String element = elstr.split("\\.")[0];
+					Integer needed = Integer.parseInt(elstr.split("\\.")[1]);
+
+					Integer current = 0;
+					for (String currStr : s.getCurrentElements()) {
+						if (currStr.startsWith(element)) {
+							current = Integer.parseInt(currStr.split("\\.")[1]);
+							break;
+						}
+					}
+					Integer intelligence = PlayerData.get(p).getAttributes().getInstance("intelligence").getBase();
+					if (current.equals(needed)) {
+						double skipChance = Math.min(intelligence * 0.03, 0.9); // up to 90% chance to skip fully completed elements
+						if (Math.random() < skipChance) {
+							continue; // skip this element
+						}
+					}
+
+					Integer delta = needed - current;
+
+					
+
+					double smartChance = Math.min(intelligence * 0.02, 0.7);
+
+					Integer amount;
+
+					if (Math.random() < smartChance) {
+						int maxHelpful = Math.min(Math.abs(delta), 20);
+						int raw = (int)(Math.random() * maxHelpful + 5);
+						amount = 5 * Math.round(raw / 5f);
+						if (delta < 0) amount = -amount;
+					} else {
+						amount = (int)(5 * Math.round(Math.floor((Math.random() * 15) + 5) / 5));
+						if (Math.random() < 0.5) amount = -amount;
+					}
+
+					n.getElements().add(element + "." + amount);
 				}
 			}
 			i++;
 		}
+
 		return n;
 	}
+
 	
 	public void startResearch(Player p, Location loc, Input i, String itemName) {
 		p.sendMessage("§eStarted research of "+itemName);
@@ -319,9 +357,9 @@ public class ResearchEvents implements Listener{
 			s.getCurrentElements().add(elstr+".0");
 			s.getNeededElements().add(elstr+"."+generateAmount());
 		}
-		s.setTopNote(generateNote(s));
-		s.setMiddleNote(generateNote(s));
-		s.setBottomNote(generateNote(s));
+		s.setTopNote(generateNote(p, s));
+		s.setMiddleNote(generateNote(p, s));
+		s.setBottomNote(generateNote(p, s));
 		stations.add(s);
 	}
 }

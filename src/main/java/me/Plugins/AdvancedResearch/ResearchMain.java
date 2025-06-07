@@ -1,5 +1,6 @@
 package me.Plugins.AdvancedResearch;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +25,9 @@ public class ResearchMain extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(events, this);
 		getServer().getPluginManager().registerEvents(db, this);
 		db.loadStations();
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			db.loadPlayer(p);
+		}
 		new BukkitRunnable()
 		{
 			public void run()

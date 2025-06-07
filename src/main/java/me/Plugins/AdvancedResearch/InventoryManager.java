@@ -68,21 +68,21 @@ public class InventoryManager {
 		i.setItem(33, getItemsAdderFiller("mcicons:icon_back_orange"));
 		ResearchEvents events = new ResearchEvents();
 		if(rs.getTopNote() == null) {
-			ResearchNote n = events.generateNote(rs);
+			ResearchNote n = events.generateNote(player, rs);
 			rs.setTopNote(n);
 			i.setItem(16, getResearchNote(n));
 		} else {
 			i.setItem(16, getResearchNote(rs.getTopNote()));
 		}
 		if(rs.getMiddleNote() == null) {
-			ResearchNote n = events.generateNote(rs);
+			ResearchNote n = events.generateNote(player, rs);
 			rs.setMiddleNote(n);
 			i.setItem(25, getResearchNote(n));
 		} else {
 			i.setItem(25, getResearchNote(rs.getMiddleNote()));
 		}
 		if(rs.getBottomNote() == null) {
-			ResearchNote n = events.generateNote(rs);
+			ResearchNote n = events.generateNote(player, rs);
 			rs.setBottomNote(n);
 			i.setItem(34, getResearchNote(n));
 		} else {
